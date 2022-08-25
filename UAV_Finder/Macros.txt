@@ -1,0 +1,17 @@
+Option Explicit
+
+
+Private Sub Worksheet_Change(ByVal Target As Range)
+If Intersect(Target, [b:b]) Is Nothing Then Exit Sub
+Application.ScreenUpdating = False
+Dim i%
+ActiveSheet.ChartObjects(1).Activate
+For i = 1 To ActiveChart.SeriesCollection(1).Points.Count
+ActiveChart.SeriesCollection(1).Points(i).HasDataLabel = True
+ActiveChart.SeriesCollection(1).Points(i).DataLabel.Caption = Sheets(1).Cells(i + 2, 2).Text
+Next
+Target.Activate
+'Application.EnableEvents = False
+'Application.Goto Target, True
+'Application.EnableEvents = True
+End Sub
